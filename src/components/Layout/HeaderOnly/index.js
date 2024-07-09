@@ -1,14 +1,19 @@
 import Header from '../components/Header';
 
-function DefaultLayout({ children }) {
+import clsx from 'clsx';
+import styles from './HeaderOnly.module.scss';
+
+function HeaderOnly({ children }) {
     return (
-        <div>
+        <div className="wrapper">
             <Header />
-            <div className="container">
-                <div className="content">{children}</div>
-            </div>
+            <main>
+                <div className="container">
+                    <div className={clsx(styles.content)}>{children}</div>
+                </div>
+            </main>
         </div>
     );
 }
 
-export default DefaultLayout;
+export default HeaderOnly;

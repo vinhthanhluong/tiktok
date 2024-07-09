@@ -1,0 +1,15 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 1px;
+    height: 65px;
+}
+
+.wrapper {
+    background-color: wheat;
+    height: 100%;
+    width: 100%;
+    padding: 10px 0;
+}

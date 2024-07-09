@@ -10,7 +10,7 @@
     --b-cl: #000;
     --w-cl: #fff;
     --body-color: #333333;
-    --content-width: 1230px;
+    --container: 1180px;
 }
 
 *,
@@ -18,6 +18,8 @@
 ::after {
     box-sizing: border-box;
     outline: none;
+    margin: 0;
+    padding: 0;
 }
 
 html {
@@ -29,4 +31,21 @@ body {
     text-rendering: optimizeSpeed;
     font-size: 1.6rem;
     line-height: var(--lh);
+}
+
+// =======================================
+.wrapper {
+    margin: 0 auto;
+    overflow: hidden;
+}
+.container {
+    max-width: 100%;
+    width: var(--container);
+    padding: 0 15px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+main {
+    margin-top: 65px;
 }
