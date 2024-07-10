@@ -1,6 +1,6 @@
-import Header from '../components/Header';
-
 import clsx from 'clsx';
+
+import Header from '../components/Header';
 import styles from './HeaderOnly.module.scss';
 
 function HeaderOnly({ children }) {

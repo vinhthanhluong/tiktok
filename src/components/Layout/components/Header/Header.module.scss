@@ -4,12 +4,123 @@
     left: 0;
     right: 0;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 1px;
-    height: 65px;
+    height: 60px;
 }
 
 .wrapper {
-    background-color: wheat;
     height: 100%;
     width: 100%;
     padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    margin-top: 10px;
+    a {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.searchResult,
+.search {
+    width: 500px;
+}
+
+.search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 46px;
+    border-radius: 100px;
+    background-color: rgba(22, 24, 35, 0.06);
+    padding-left: 16px;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    &:hover {
+        border-color: #c5c6c9;
+        .searchBtn {
+            color: var(--b-cl);
+            background-color: rgba(22, 24, 35, 0.1);
+        }
+    }
+    &:focus-within {
+        border-color: #c5c6c9;
+    }
+
+    input {
+        background-color: transparent;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        color: var(--b-cl);
+        caret-color: #fe2c55;
+        font-size: 16px;
+        padding-right: 40px;
+        &:not(:placeholder-shown) {
+            & ~ .searchBtn {
+                color: rgba($color: #000000, $alpha: 0.74);
+            }
+        }
+    }
+}
+
+.searchClear,
+.loading {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 54px;
+    margin: auto 12px auto 0;
+}
+
+.searchClear {
+    background-color: transparent;
+    color: rgba(22, 24, 35, 0.34);
+    cursor: pointer;
+    font-size: 100%;
+    transition: all 0.3s ease;
+    line-height: 1;
+    &:hover {
+        color: rgba(22, 24, 35, 0.8);
+    }
+}
+
+.loading {
+    font-size: 100%;
+}
+
+.searchBtn {
+    position: relative;
+    padding: 14px 20px 11px 16px;
+    background: transparent;
+    height: 100%;
+    font-size: 18px;
+    color: rgba($color: #000000, $alpha: 0.34);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    &::before {
+        content: "";
+        position: absolute;
+        top: 10px;
+        bottom: 10px;
+        left: 0;
+        width: 1px;
+        background-color: rgba($color: #000, $alpha: 0.12);
+    }
+}
+
+.searchTitle {
+    padding: 5px 12px;
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(22, 24, 35, 0.5);
+}
+
+.actions {
+    margin-left: 10px;
 }
