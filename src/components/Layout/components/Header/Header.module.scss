@@ -123,4 +123,14 @@
 
 .actions {
     margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.moteBtn {
+    margin-left: 14px;
+    padding: 4px 10px;
+    font-size: 18px;
+    background-color: transparent;
+    cursor: pointer;
 }

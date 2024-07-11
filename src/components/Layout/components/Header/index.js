@@ -2,17 +2,43 @@ import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 //Font
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark, faMagnifyingGlass, faSignIn, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import {
+    faCircleQuestion,
+    faCircleXmark,
+    faEarthAsia,
+    faEllipsisVertical,
+    faMagnifyingGlass,
+    faMoon,
+    faSignIn,
+    faSpinner,
+} from '@fortawesome/free-solid-svg-icons';
 // Popper || Tippy
 import Tippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
 import { Link } from 'react-router-dom';
 
-import { Wrapper as PopperWrapper } from '~/components/Popper';
 import styles from './Header.module.scss';
 import images from '~/assets/images';
-import AccountItem from '~/components/Layout/AccountItem';
-import Button from '~/components/Layout/Button';
+import AccountItem from '~/components/AccountItem';
+import Button from '~/components/Button';
+import { Wrapper as PopperWrapper } from '~/components/Popper';
+import { MenuMore } from '~/components/Popper';
+
+const MENU_ITEMS = [
+    {
+        icon: <FontAwesomeIcon icon={faEarthAsia} />,
+        title: 'English',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+        title: 'Feedback and help',
+        to: '/feedback',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faMoon} />,
+        title: 'Dark mode',
+    },
+];
 
 function Header() {
     const [searchResult, setSearchResult] = useState([]);
@@ -60,13 +86,17 @@ function Header() {
                         </div>
                     </Tippy>
                     <div className={clsx(styles.actions)}>
-                        <Button rounded>Get app</Button>
                         <Button to="/upload" text>
                             Upload
                         </Button>
                         <Button to="/login" primary leftIcon={<FontAwesomeIcon icon={faSignIn} />}>
                             Log in
                         </Button>
+                        <MenuMore items={MENU_ITEMS}>
+                            <button className={clsx(styles.moteBtn)}>
+                                <FontAwesomeIcon icon={faEllipsisVertical} />
+                            </button>
+                        </MenuMore>
                     </div>
                 </div>
             </div>
