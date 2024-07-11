@@ -6,22 +6,57 @@ import 'tippy.js/dist/tippy.css';
 import styles from './Menu.module.scss';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import MenuItem from './MenuItem';
+import MenuLabel from './MenuLabel';
+import { useState } from 'react';
 
-function Menu({ children, items = [] }) {
+const defaultFn = () => {};
+
+function Menu({ children, items = [], onChange = defaultFn }) {
+    // đặt trùng data để cho parent vs children có thể render map ra mà k cần phải viết thêm 1 lần map
+    const [history, setHistory] = useState([{ data: items }]);
+    const current = history[history.length - 1];
+
     const renderItems = () => {
-        return items.map((item, index) => <MenuItem key={index} data={item} />);
+        return current.data.map((item, index) => {
+            const isParent = !!item.children;
+            return (
+                <MenuItem
+                    key={index}
+                    data={item}
+                    onClick={() => {
+                        if (isParent) {
+                            setHistory((prev) => [...prev, item.children]);
+                        } else {
+                            onChange(item);
+                        }
+                    }}
+                />
+            );
+        });
     };
 
     return (
         <Tippy
             delay={[0, 300]}
+            // visible
             interactive={true}
             placement="bottom-end"
             render={(attrs) => (
                 <div className={clsx(styles.menuList)} tabIndex="-1" {...attrs}>
-                    <PopperWrapper>{renderItems()}</PopperWrapper>
+                    <PopperWrapper>
+                        {history.length > 1 && (
+                            <MenuLabel
+                                title={current.title}
+                                onBack={() => {
+                                    setHistory((prev) => prev.slice(0, -1));
+                                }}
+                            />
+                        )}
+                        {renderItems()}
+                    </PopperWrapper>
                 </div>
             )}
+            onHide={(prev) => setHistory((prev) => prev.slice(0, 1))}
         >
             {children}
         </Tippy>
