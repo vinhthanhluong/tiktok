@@ -9,7 +9,7 @@
     --primary: #fe2c55;
     --b-cl: #000;
     --w-cl: #fff;
-    --body-color: #333333;
+    --body-color: #161823;
     --container: 1180px;
 }
 
@@ -66,4 +66,19 @@ li {
 
 main {
     margin-top: 65px;
+}
+
+// Custom tippy
+body {
+    .tippy-box {
+        border-radius: 8px;
+        font-weight: 500;
+        background-color: red;
+        font-size: 16px;
+        line-height: 1.5;
+        background-color: rgba(84, 84, 84, 0.92);
+    }
+    .tippy-arrow {
+        color: rgba(84, 84, 84, 0.92);
+    }
 }

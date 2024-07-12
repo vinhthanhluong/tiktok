@@ -5,15 +5,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleQuestion,
     faCircleXmark,
+    faCloudUpload,
+    faCoins,
     faEarthAsia,
     faEllipsisVertical,
+    faGear,
     faMagnifyingGlass,
     faMoon,
     faSignIn,
+    faSignOut,
     faSpinner,
+    faUser,
 } from '@fortawesome/free-solid-svg-icons';
 // Popper || Tippy
-import Tippy from '@tippyjs/react/headless';
+import Tippy from '@tippyjs/react/';
+import TippyHeadless from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
 import { Link } from 'react-router-dom';
 
@@ -52,10 +58,29 @@ const MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faMoon} />,
         title: 'Dark mode',
+        children: {
+            title: 'Dark mode',
+            data: [
+                {
+                    type: 'modeTheme',
+                    title: 'Use device theme',
+                },
+                {
+                    type: 'modeTheme',
+                    title: 'Dark mode',
+                },
+                {
+                    type: 'modeTheme',
+                    title: 'Light mode',
+                },
+            ],
+        },
     },
 ];
 
 function Header() {
+    let currentUser = true;
+
     const [searchResult, setSearchResult] = useState([]);
     useEffect(() => {
         setTimeout(() => {
@@ -76,6 +101,31 @@ function Header() {
         }
     };
 
+    const userMenu = [
+        {
+            icon: <FontAwesomeIcon icon={faUser} />,
+            title: 'View profile',
+            to: '/@hoaa',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faCoins} />,
+            title: 'Get coins',
+            to: '/coins',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faGear} />,
+            title: 'Settings',
+            to: '/settings',
+        },
+        ...MENU_ITEMS,
+        {
+            icon: <FontAwesomeIcon icon={faSignOut} />,
+            title: 'Log out',
+            to: '/logout',
+            separate: true,
+        },
+    ];
+
     return (
         <header className={clsx(styles.header)}>
             <div className="container">
@@ -85,7 +135,7 @@ function Header() {
                             <img src={images.logo} alt="Tiktok" />
                         </Link>
                     </div>
-                    <Tippy
+                    <TippyHeadless
                         interactive={true}
                         visible={searchResult.length > 0}
                         placement="bottom"
@@ -112,18 +162,39 @@ function Header() {
                                 <FontAwesomeIcon icon={faMagnifyingGlass} />
                             </button>
                         </div>
-                    </Tippy>
+                    </TippyHeadless>
                     <div className={clsx(styles.actions)}>
-                        <Button to="/upload" text>
-                            Upload
-                        </Button>
-                        <Button to="/login" primary leftIcon={<FontAwesomeIcon icon={faSignIn} />}>
-                            Log in
-                        </Button>
-                        <MenuMore items={MENU_ITEMS} onChange={handleMenuChange}>
-                            <button className={clsx(styles.moteBtn)}>
-                                <FontAwesomeIcon icon={faEllipsisVertical} />
-                            </button>
+                        {currentUser ? (
+                            <>
+                                <Tippy trigger="click" delay={[0, 200]} content="Upload Video" placement="bottom">
+                                    <button className={clsx(styles.actionsBtn)}>
+                                        <FontAwesomeIcon icon={faCloudUpload} />
+                                    </button>
+                                </Tippy>
+                            </>
+                        ) : (
+                            <>
+                                <Button to="/upload" text>
+                                    Upload
+                                </Button>
+                                <Button to="/login" primary leftIcon={<FontAwesomeIcon icon={faSignIn} />}>
+                                    Log in
+                                </Button>
+                            </>
+                        )}
+
+                        <MenuMore items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                            {currentUser ? (
+                                <img
+                                    className={clsx(styles.userAvatar)}
+                                    src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/e2a0d34d71940773067459da2d4ef05d~c5_300x300.webp?lk3s=a5d48078&nonce=52196&refresh_token=a5598e9f450496d3bdb5808989ea1e67&x-expires=1720749600&x-signature=x3xpbjqnBSzwxI2iM6uAGooCDCI%3D&shp=a5d48078&shcp=c1333099"
+                                    alt="Nguyen Van A"
+                                />
+                            ) : (
+                                <button className={clsx(styles.moteBtn)}>
+                                    <FontAwesomeIcon icon={faEllipsisVertical} />
+                                </button>
+                            )}
                         </MenuMore>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 // Popper || Tippy
-import Tippy from '@tippyjs/react/headless';
+import TippyHeadless from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
 
 import styles from './Menu.module.scss';
@@ -36,9 +36,10 @@ function Menu({ children, items = [], onChange = defaultFn }) {
     };
 
     return (
-        <Tippy
+        <TippyHeadless
             delay={[0, 300]}
             // visible
+            // offset={[10, 10]}
             interactive={true}
             placement="bottom-end"
             render={(attrs) => (
@@ -59,7 +60,7 @@ function Menu({ children, items = [], onChange = defaultFn }) {
             onHide={(prev) => setHistory((prev) => prev.slice(0, 1))}
         >
             {children}
-        </Tippy>
+        </TippyHeadless>
     );
 }
 

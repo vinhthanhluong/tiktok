@@ -121,16 +121,32 @@
     color: rgba(22, 24, 35, 0.5);
 }
 
-.actions {
-    margin-left: 10px;
-    display: flex;
-    align-items: center;
-}
-
 .moteBtn {
     margin-left: 14px;
     padding: 4px 10px;
     font-size: 18px;
     background-color: transparent;
     cursor: pointer;
+}
+
+//Active current user
+.actions {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.actionsBtn {
+    background-color: transparent;
+    font-size: 24px;
+    color: #161823;
+    padding: 7px 12px 4px;
+    cursor: pointer;
+}
+
+.userAvatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 100%;
+    margin-left: 10px;
 }
