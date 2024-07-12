@@ -1,10 +1,8 @@
-import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 //Font
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleQuestion,
-    faCircleXmark,
     faCoins,
     faEarthAsia,
     faEllipsisVertical,
@@ -12,23 +10,20 @@ import {
     faMoon,
     faSignIn,
     faSignOut,
-    faSpinner,
     faUser,
 } from '@fortawesome/free-solid-svg-icons';
 // Popper || Tippy
 import Tippy from '@tippyjs/react/';
-import TippyHeadless from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
 import { Link } from 'react-router-dom';
 
 import styles from './Header.module.scss';
 import images from '~/assets/images';
-import AccountItem from '~/components/AccountItem';
 import Button from '~/components/Button';
-import { Wrapper as PopperWrapper } from '~/components/Popper';
 import { MenuMore } from '~/components/Popper';
-import { SearchIcon, UploadIcon, InboxIcon, MessageIcon } from '~/components/Icon';
+import { UploadIcon, InboxIcon, MessageIcon } from '~/components/Icon';
 import Image from '~/components/Image';
+import Search from '~/components/Layout/components/Search';
 
 const MENU_ITEMS = [
     {
@@ -81,14 +76,6 @@ const MENU_ITEMS = [
 function Header() {
     let currentUser = true;
 
-    const [searchResult, setSearchResult] = useState([]);
-    useEffect(() => {
-        setTimeout(() => {
-            // setSearchResult([1, 2, 3]);
-            setSearchResult([]);
-        }, 0);
-    }, []);
-
     // handle logic
     const handleMenuChange = (menuItem) => {
         switch (menuItem.type) {
@@ -135,35 +122,9 @@ function Header() {
                             <img src={images.logo} alt="Tiktok" />
                         </Link>
                     </div>
-                    <TippyHeadless
-                        interactive={true}
-                        visible={searchResult.length > 0}
-                        placement="bottom"
-                        render={(attrs) => (
-                            <div className={clsx(styles.searchResult)} tabIndex="-1" {...attrs}>
-                                <PopperWrapper>
-                                    <h4 className={clsx(styles.searchTitle)}>Accounts</h4>
-                                    <AccountItem />
-                                    <AccountItem />
-                                    <AccountItem />
-                                    <AccountItem />
-                                </PopperWrapper>
-                            </div>
-                        )}
-                    >
-                        <div className={clsx(styles.search)}>
-                            <input type="text" placeholder="Tìm kiếm" spellCheck={false} />
-                            <button className={clsx(styles.searchClear)}>
-                                <FontAwesomeIcon icon={faCircleXmark} />
-                            </button>
-                            <FontAwesomeIcon className={clsx(styles.loading)} icon={faSpinner} />
 
-                            <button className={clsx(styles.searchBtn)}>
-                                {/* <FontAwesomeIcon icon={faMagnifyingGlass} /> */}
-                                <SearchIcon />
-                            </button>
-                        </div>
-                    </TippyHeadless>
+                    <Search />
+
                     <div className={clsx(styles.actions)}>
                         {currentUser ? (
                             <>
@@ -198,7 +159,7 @@ function Header() {
                             {currentUser ? (
                                 <Image
                                     className={clsx(styles.userAvatar)}
-                                    src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/e2a0d34d71940773067459da2d4ef05d~c5_300x300.webp?lk3s=a5d48078&nonce=52196&refresh_token=a5598e9f450496d3bdb5808989ea1e67&x-expires=1720749600&x-signature=x3xpbjqnBSzwxI2iM6uAGooCDCI%3D&shp=a5d48078&shcp=c1333099"
+                                    src="https://files.fullstack.edu.vn/f8-prod/user_avatars/1/623d4b2d95cec.png"
                                     alt="Nguyen Van A"
                                     fallback={images.logo}
                                 />
