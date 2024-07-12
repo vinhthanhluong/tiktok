@@ -96,7 +96,7 @@
 
 .searchBtn {
     position: relative;
-    padding: 14px 20px 11px 16px;
+    padding: 9px 20px 11px 16px;
     background: transparent;
     height: 100%;
     font-size: 18px;
@@ -140,8 +140,9 @@
     background-color: transparent;
     font-size: 24px;
     color: #161823;
-    padding: 7px 12px 4px;
+    padding: 7px 10px 4px;
     cursor: pointer;
+    line-height: 1;
 }
 
 .userAvatar {
@@ -149,4 +150,5 @@
     height: 38px;
     border-radius: 100%;
     margin-left: 10px;
+    cursor: pointer;
 }
