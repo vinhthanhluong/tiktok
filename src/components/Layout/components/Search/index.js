@@ -20,10 +20,16 @@ function Search() {
     const inputRef = useRef();
 
     useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([1, 2, 3]);
-        }, 0);
-    }, []);
+        // Nếu không có searchValue thì sẽ thoát hàm searchValue
+        if (!searchValue.trim()) {
+            return;
+        }
+        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${searchValue}&type=less`)
+            .then((res) => res.json())
+            .then((res) => {
+                setSearchResult(res.data);
+            });
+    }, [searchValue]);
 
     const handleClear = () => {
         setSearchValue('');
@@ -44,10 +50,9 @@ function Search() {
                 <div className={clsx(styles.searchResult)} tabIndex="-1" {...attrs}>
                     <PopperWrapper>
                         <h4 className={clsx(styles.searchTitle)}>Accounts</h4>
-                        <AccountItem />
-                        <AccountItem />
-                        <AccountItem />
-                        <AccountItem />
+                        {searchResult.map((result) => {
+                            return <AccountItem key={result.id} data={result} />;
+                        })}
                     </PopperWrapper>
                 </div>
             )}
@@ -61,6 +66,12 @@ function Search() {
                     placeholder="Tìm kiếm"
                     spellCheck={false}
                     onChange={(e) => setSearchValue(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (/^\s/.test(e.target.value)) {
+                            e.target.value = '';
+                        }
+                        // return (e.target.value = e.target.value ? e.target.value.trimStart() : '');
+                    }}
                     onFocus={() => setShowResult(true)}
                 />
                 {!!searchValue && (
