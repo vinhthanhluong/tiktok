@@ -2,13 +2,14 @@ import clsx from 'clsx';
 //Font
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 import styles from './AccountItem.module.scss';
 import Image from '~/components/Image';
 
-function AccountItem({ data }) {
+function AccountItem({ data, ...props }) {
     return (
-        <div className={clsx(styles.wrapper)}>
+        <Link to={`/@${data.nickname}`} className={clsx(styles.wrapper)} {...props}>
             <Image className={styles.avatar} src={data.avatar} alt={data.full_name} />
             <div className={clsx(styles.info)}>
                 <h4 className={styles.name}>
@@ -17,7 +18,7 @@ function AccountItem({ data }) {
                 </h4>
                 <span className={styles.username}>{data.nickname}</span>
             </div>
-        </div>
+        </Link>
     );
 }
 

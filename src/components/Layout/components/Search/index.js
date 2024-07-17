@@ -16,18 +16,27 @@ function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
     const [showResult, setShowResult] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const inputRef = useRef();
 
     useEffect(() => {
-        // Nếu không có searchValue thì sẽ thoát hàm searchValue
+        // Nếu không có searchValue thì sẽ thoát hàm khi k có searchingValue đi
         if (!searchValue.trim()) {
+            setSearchResult([]);
             return;
         }
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${searchValue}&type=less`)
+
+        setLoading(true);
+
+        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
             .then((res) => res.json())
             .then((res) => {
                 setSearchResult(res.data);
+                setLoading(false);
+            })
+            .catch(() => {
+                setLoading(false);
             });
     }, [searchValue]);
 
@@ -41,6 +50,10 @@ function Search() {
         setShowResult(false);
     };
 
+    const handleCloseResult = () => {
+        setShowResult(false);
+    };
+
     return (
         <TippyHeadless
             interactive={true}
@@ -51,7 +64,7 @@ function Search() {
                     <PopperWrapper>
                         <h4 className={clsx(styles.searchTitle)}>Accounts</h4>
                         {searchResult.map((result) => {
-                            return <AccountItem key={result.id} data={result} />;
+                            return <AccountItem key={result.id} data={result} onClick={handleCloseResult} />;
                         })}
                     </PopperWrapper>
                 </div>
@@ -67,19 +80,21 @@ function Search() {
                     spellCheck={false}
                     onChange={(e) => setSearchValue(e.target.value)}
                     onKeyDown={(e) => {
-                        if (/^\s/.test(e.target.value)) {
-                            e.target.value = '';
+                        if (e.which === 32) {
+                            e.target.value = e.target.value.replace(/^\s+/, '');
+                            if (e.target.value.length === 0) {
+                                e.preventDefault();
+                            }
                         }
-                        // return (e.target.value = e.target.value ? e.target.value.trimStart() : '');
                     }}
                     onFocus={() => setShowResult(true)}
                 />
-                {!!searchValue && (
+                {!!searchValue && !loading && (
                     <button className={clsx(styles.searchClear)} onClick={handleClear}>
                         <FontAwesomeIcon icon={faCircleXmark} />
                     </button>
                 )}
-                {/* <FontAwesomeIcon className={clsx(styles.loading)} icon={faSpinner} /> */}
+                {loading && <FontAwesomeIcon className={clsx(styles.loading)} icon={faSpinner} />}
 
                 <button className={clsx(styles.searchBtn)}>
                     <SearchIcon />
