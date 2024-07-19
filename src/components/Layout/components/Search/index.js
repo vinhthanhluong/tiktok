@@ -54,6 +54,13 @@ function Search() {
         setShowResult(false);
     };
 
+    const handleChange = (e) => {
+        const searchValue = e.target.value;
+        if (!searchValue.startsWith(' ')) {
+            setSearchValue(searchValue);
+        }
+    };
+
     return (
         <TippyHeadless
             interactive={true}
@@ -78,15 +85,15 @@ function Search() {
                     type="text"
                     placeholder="Tìm kiếm"
                     spellCheck={false}
-                    onChange={(e) => setSearchValue(e.target.value)}
-                    onKeyDown={(e) => {
-                        if (e.which === 32) {
-                            e.target.value = e.target.value.replace(/^\s+/, '');
-                            if (e.target.value.length === 0) {
-                                e.preventDefault();
-                            }
-                        }
-                    }}
+                    onChange={handleChange}
+                    // onKeyDown={(e) => {
+                    //     if (e.which === 32) {
+                    //         e.target.value = e.target.value.replace(/^\s+/, '');
+                    //         if (e.target.value.length === 0) {
+                    //             e.preventDefault();
+                    //         }
+                    //     }
+                    // }}
                     onFocus={() => setShowResult(true)}
                 />
                 {!!searchValue && !loading && (

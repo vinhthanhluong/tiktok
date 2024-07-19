@@ -24,6 +24,7 @@ import { MenuMore } from '~/components/Popper';
 import { UploadIcon, InboxIcon, MessageIcon } from '~/components/Icon';
 import Image from '~/components/Image';
 import Search from '~/components/Layout/components/Search';
+import routesConfig from '~/config/routes';
 
 const MENU_ITEMS = [
     {
@@ -118,7 +119,7 @@ function Header() {
             <div className="container">
                 <div className={clsx(styles.wrapper)}>
                     <div className={clsx(styles.logo)}>
-                        <Link to="/">
+                        <Link to={routesConfig.home}>
                             <img src={images.logo} alt="Tiktok" />
                         </Link>
                     </div>

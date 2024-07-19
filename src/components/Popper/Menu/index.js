@@ -11,7 +11,7 @@ import { useState } from 'react';
 
 const defaultFn = () => {};
 
-function Menu({ children, items = [], onChange = defaultFn }) {
+function Menu({ children, items = [], onChange = defaultFn, hideOnClick = false }) {
     // đặt trùng data để cho parent vs children có thể render map ra mà k cần phải viết thêm 1 lần map
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
@@ -39,7 +39,7 @@ function Menu({ children, items = [], onChange = defaultFn }) {
         <TippyHeadless
             delay={[0, 300]}
             // visible
-            // offset={[10, 10]}
+            hideOnClick={hideOnClick}
             interactive={true}
             placement="bottom-end"
             render={(attrs) => (
