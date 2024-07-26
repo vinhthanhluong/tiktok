@@ -53,7 +53,7 @@ function Menu({ children, items = [], onChange = defaultFn, hideOnClick = false 
                                 }}
                             />
                         )}
-                        {renderItems()}
+                        <div className={clsx(styles.menuBody)}>{renderItems()}</div>
                     </PopperWrapper>
                 </div>
             )}

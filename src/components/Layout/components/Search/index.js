@@ -62,52 +62,48 @@ function Search() {
     };
 
     return (
-        <TippyHeadless
-            interactive={true}
-            visible={showResult && searchResult.length > 0}
-            placement="bottom"
-            render={(attrs) => (
-                <div className={clsx(styles.searchResult)} tabIndex="-1" {...attrs}>
-                    <PopperWrapper>
-                        <h4 className={clsx(styles.searchTitle)}>Accounts</h4>
-                        {searchResult.map((result) => {
-                            return <AccountItem key={result.id} data={result} onClick={handleCloseResult} />;
-                        })}
-                    </PopperWrapper>
-                </div>
-            )}
-            onClickOutside={handleHideResult}
-        >
-            <div className={clsx(styles.search)}>
-                <input
-                    ref={inputRef}
-                    value={searchValue}
-                    type="text"
-                    placeholder="Tìm kiếm"
-                    spellCheck={false}
-                    onChange={handleChange}
-                    // onKeyDown={(e) => {
-                    //     if (e.which === 32) {
-                    //         e.target.value = e.target.value.replace(/^\s+/, '');
-                    //         if (e.target.value.length === 0) {
-                    //             e.preventDefault();
-                    //         }
-                    //     }
-                    // }}
-                    onFocus={() => setShowResult(true)}
-                />
-                {!!searchValue && !loading && (
-                    <button className={clsx(styles.searchClear)} onClick={handleClear}>
-                        <FontAwesomeIcon icon={faCircleXmark} />
-                    </button>
+        // Using a wrapper <div> tag around the reference element solves this by creating a new parentNode context.
+        <div>
+            <TippyHeadless
+                // appendTo={() => document.body}
+                interactive={true}
+                visible={showResult && searchResult.length > 0}
+                placement="bottom"
+                render={(attrs) => (
+                    <div className={clsx(styles.searchResult)} tabIndex="-1" {...attrs}>
+                        <PopperWrapper>
+                            <h4 className={clsx(styles.searchTitle)}>Accounts</h4>
+                            {searchResult.map((result) => {
+                                return <AccountItem key={result.id} data={result} onClick={handleCloseResult} />;
+                            })}
+                        </PopperWrapper>
+                    </div>
                 )}
-                {loading && <FontAwesomeIcon className={clsx(styles.loading)} icon={faSpinner} />}
+                onClickOutside={handleHideResult}
+            >
+                <div className={clsx(styles.search)}>
+                    <input
+                        ref={inputRef}
+                        value={searchValue}
+                        type="text"
+                        placeholder="Tìm kiếm"
+                        spellCheck={false}
+                        onChange={handleChange}
+                        onFocus={() => setShowResult(true)}
+                    />
+                    {!!searchValue && !loading && (
+                        <button className={clsx(styles.searchClear)} onClick={handleClear}>
+                            <FontAwesomeIcon icon={faCircleXmark} />
+                        </button>
+                    )}
+                    {loading && <FontAwesomeIcon className={clsx(styles.loading)} icon={faSpinner} />}
 
-                <button className={clsx(styles.searchBtn)}>
-                    <SearchIcon />
-                </button>
-            </div>
-        </TippyHeadless>
+                    <button className={clsx(styles.searchBtn)}>
+                        <SearchIcon />
+                    </button>
+                </div>
+            </TippyHeadless>
+        </div>
     );
 }
 

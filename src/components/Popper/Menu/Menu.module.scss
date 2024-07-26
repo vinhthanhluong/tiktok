@@ -19,6 +19,10 @@
     }
 }
 
+.menuBody {
+    overflow-y: auto;
+}
+
 // Menu Label
 .header {
     position: relative;
@@ -29,6 +33,7 @@
     text-align: center;
     border-bottom: 1px solid #eee;
     padding-bottom: 8px;
+    flex-shrink: 0;
 }
 .backBtn {
     min-width: 60px;
