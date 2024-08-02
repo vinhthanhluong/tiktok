@@ -23,8 +23,8 @@ import Button from '~/components/Button';
 import { MenuMore } from '~/components/Popper';
 import { UploadIcon, InboxIcon, MessageIcon } from '~/components/Icon';
 import Image from '~/components/Image';
-import Search from '~/components/Layout/components/Search';
-import routesConfig from '~/config/routes';
+import Search from '~/layouts/components/Search';
+import config from '~/config';
 
 const MENU_ITEMS = [
     {
@@ -229,7 +229,7 @@ function Header() {
             <div className="container">
                 <div className={clsx(styles.wrapper)}>
                     <div className={clsx(styles.logo)}>
-                        <Link to={routesConfig.home}>
+                        <Link to={config.router.home}>
                             <img src={images.logo} alt="Tiktok" />
                         </Link>
                     </div>
@@ -275,11 +275,9 @@ function Header() {
                                     fallback={images.logo}
                                 />
                             ) : (
-                                <>
-                                    <button className={clsx(styles.moteBtn)}>
-                                        <FontAwesomeIcon icon={faEllipsisVertical} />
-                                    </button>
-                                </>
+                                <button className={clsx(styles.moteBtn)}>
+                                    <FontAwesomeIcon icon={faEllipsisVertical} />
+                                </button>
                             )}
                         </MenuMore>
                     </div>

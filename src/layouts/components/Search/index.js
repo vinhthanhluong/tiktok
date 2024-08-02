@@ -12,7 +12,7 @@ import { SearchIcon } from '~/components/Icon';
 import AccountItem from '~/components/AccountItem';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import { useDebounce } from '~/hooks';
-import * as searchServices from '~/apiServices/searchServices';
+import * as searchServices from '~/services/searchService';
 
 function Search() {
     const [searchValue, setSearchValue] = useState('');
@@ -62,7 +62,7 @@ function Search() {
     };
 
     return (
-        // Using a wrapper <div> tag around the reference element solves this by creating a new parentNode context.
+        // Using a wrapper <div> ztag around the reference element solves this by creating a new parentNode context.
         <div>
             <TippyHeadless
                 // appendTo={() => document.body}
