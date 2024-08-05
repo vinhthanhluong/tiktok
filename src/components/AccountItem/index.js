@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import clsx from 'clsx';
 //Font
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,5 +22,9 @@ function AccountItem({ data, ...props }) {
         </Link>
     );
 }
+
+AccountItem.propTypes = {
+    data: PropTypes.object.isRequired,
+};
 
 export default AccountItem;

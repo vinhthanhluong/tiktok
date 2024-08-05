@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import clsx from 'clsx';
 // Popper || Tippy
 import TippyHeadless from '@tippyjs/react/headless';
@@ -63,5 +64,12 @@ function Menu({ children, items = [], onChange = defaultFn, hideOnClick = false 
         </TippyHeadless>
     );
 }
+
+Menu.propTypes = {
+    children: PropTypes.node.isRequired,
+    items: PropTypes.array,
+    onChange: PropTypes.func,
+    hideOnClick: PropTypes.bool,
+};
 
 export default Menu;
