@@ -62,7 +62,7 @@ function Search() {
     };
 
     return (
-        // Using a wrapper <div> ztag around the reference element solves this by creating a new parentNode context.
+        // Using a wrapper <div> tag around the reference element solves this by creating a new parentNode context.
         <div>
             <TippyHeadless
                 // appendTo={() => document.body}

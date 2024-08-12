@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-import Header from '../components/Header';
-import Sidebar from './Sidebar';
 import styles from './DefaultLayout.module.scss';
+import Header from '~/layouts/components/Header';
+import Sidebar from '~/layouts/components/Sidebar';
 
 function DefaultLayout({ children }) {
     return (
         <div className="wrapper">
             <Header />
             <main>
-                <div className={clsx('container', styles.dLayout)}>
+                <div className={clsx('container1', styles.dLayout)}>
                     <Sidebar />
                     <div className={clsx(styles.content)}>{children}</div>
                 </div>
