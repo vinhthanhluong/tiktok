@@ -4,6 +4,7 @@ import config from '~/config';
 
 import Menu, { MenuItem } from './Menu';
 import { HomeIcon, UserGroupIcon, LiveIcon } from '~/components/Icon';
+import SuggestedAccounts from '~/components/SuggestedAccounts';
 
 function Sidebar() {
     return (
@@ -13,6 +14,8 @@ function Sidebar() {
                 <MenuItem title="Following" to={config.router.following} icon={<UserGroupIcon />} />
                 <MenuItem title="Live" to={config.router.live} icon={<LiveIcon />} />
             </Menu>
+            <SuggestedAccounts label="Suggested accounts" />
+            <SuggestedAccounts label="Following accounts" />
         </aside>
     );
 }
