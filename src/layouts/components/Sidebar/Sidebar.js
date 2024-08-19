@@ -14,7 +14,7 @@ function Sidebar() {
                 <MenuItem title="Following" to={config.router.following} icon={<UserGroupIcon />} />
                 <MenuItem title="Live" to={config.router.live} icon={<LiveIcon />} />
             </Menu>
-            <SuggestedAccounts label="Suggested accounts" />
+            <SuggestedAccounts label="Suggested accounts" popup={true} />
             <SuggestedAccounts label="Following accounts" />
         </aside>
     );
